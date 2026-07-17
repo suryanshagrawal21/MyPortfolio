@@ -62,7 +62,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="font-display text-5xl md:text-7xl font-bold text-white leading-tight mb-2"
+            className="font-display text-5xl md:text-7xl lg:text-[90px] font-extrabold text-white leading-none mb-4 tracking-tight"
           >
             {personalInfo.name}
             <span className="gradient-text">.</span>
