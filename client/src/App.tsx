@@ -1,35 +1,18 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import Footer from './components/Footer';
-import CursorSparkles from './components/CursorSparkles';
-
-// Lazy load the case study page
-const ProjectCaseStudy = React.lazy(() => import('./pages/ProjectCaseStudy'));
-
-const LoadingFallback = () => (
-  <div className="w-full h-screen flex items-center justify-center bg-dark-bg">
-    <div className="w-8 h-8 border-4 border-white/10 border-t-white rounded-full animate-spin"></div>
-  </div>
-);
 
 function App() {
   return (
     <Router>
-      <div className="bg-dark-bg min-h-screen text-gray-200 selection:bg-white/20 flex flex-col">
-        <CursorSparkles />
+      <div className="min-h-screen flex flex-col" style={{ background: '#0A0A0F', color: '#F0F0F8' }}>
         <Navbar />
-
-        <div className="flex-grow">
-          <React.Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/projects/:id" element={<ProjectCaseStudy />} />
-            </Routes>
-          </React.Suspense>
-        </div>
-
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>

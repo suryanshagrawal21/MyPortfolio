@@ -78,18 +78,6 @@ if (heroText) {
     type();
 }
 
-// Add active styling to nav links
-const style = document.createElement('style');
-style.textContent = `
-    .nav-link.active {
-        color: #08efe0;
-    }
-    .nav-link.active::after {
-        width: 100%;
-    }
-`;
-document.head.appendChild(style);
-
 // Scroll to top button
 const scrollTopBtn = document.createElement('button');
 scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';

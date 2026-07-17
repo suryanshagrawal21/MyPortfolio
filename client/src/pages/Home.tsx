@@ -1,38 +1,27 @@
-import React, { Suspense } from 'react';
-import Hero from '../components/Hero';
-
-// Lazy loading below-the-fold components for performance
-const MetricsStrip = React.lazy(() => import('../components/MetricsStrip'));
-const CurrentlyBuilding = React.lazy(() => import('../components/CurrentlyBuilding'));
-const Architecture = React.lazy(() => import('../components/Architecture'));
-const About = React.lazy(() => import('../components/About'));
-const Skills = React.lazy(() => import('../components/Skills'));
-const Projects = React.lazy(() => import('../components/Projects'));
-const Experience = React.lazy(() => import('../components/Experience'));
-const Contact = React.lazy(() => import('../components/Contact'));
-
-const LoadingFallback = () => (
-    <div className="w-full h-32 flex items-center justify-center bg-dark-bg">
-        <div className="w-8 h-8 border-4 border-white/10 border-t-white rounded-full animate-spin"></div>
-    </div>
-);
+import Hero from '../components/sections/Hero';
+import About from '../components/sections/About';
+import Skills from '../components/sections/Skills';
+import Projects from '../components/sections/Projects';
+import Experience from '../components/sections/Experience';
+import Certifications from '../components/sections/Certifications';
+import Education from '../components/sections/Education';
+import CodingProfiles from '../components/sections/CodingProfiles';
+import Contact from '../components/sections/Contact';
 
 const Home = () => {
-    return (
-        <main>
-            <Hero />
-            <Suspense fallback={<LoadingFallback />}>
-                <MetricsStrip />
-                <CurrentlyBuilding />
-                <Projects />
-                <Architecture />
-                <Experience />
-                <Skills />
-                <About />
-                <Contact />
-            </Suspense>
-        </main>
-    );
+  return (
+    <>
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Experience />
+      <Certifications />
+      <Education />
+      <CodingProfiles />
+      <Contact />
+    </>
+  );
 };
 
 export default Home;
