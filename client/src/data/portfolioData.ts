@@ -78,7 +78,7 @@ export const personalInfo = {
   linkedin: 'https://www.linkedin.com/in/suryansh-agrawal-b43821283',
   github: 'https://github.com/suryanshagrawal21',
   leetcode: 'https://leetcode.com/u/suryanshagrawal21/',
-  resumeUrl: 'https://drive.google.com/file/d/1L9NkA7kLa_t7OMV46Xy6aYHJrR5ur2_V/view?usp=sharing',
+  resumeUrl: '/suryanshresume.pdf',
   bio: "I'm a B.Tech CSE student (2023–27) at SRM IST, passionate about building scalable full-stack applications and intelligent AI/ML systems. I architect robust backends, craft polished frontends, and integrate machine learning pipelines — bridging engineering precision with real-world impact.",
   tagline: 'Building the future, one commit at a time.',
   availability: 'Open to Internships & Full-Time Roles',
