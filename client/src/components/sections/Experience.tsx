@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { experiences } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { MapPin, Calendar, Briefcase } from 'lucide-react';
 
 const Experience = () => {

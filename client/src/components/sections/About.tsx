@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { personalInfo, skillGroups } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { Code2, Cpu, Database, Layers } from 'lucide-react';
 
 const statItems = [

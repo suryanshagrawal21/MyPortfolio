@@ -19,29 +19,29 @@ const Footer = () => {
           </div>
 
           {/* Made with */}
-          <p className="text-[#55556A] text-xs font-mono flex items-center gap-1">
+          <p className="text-[#8080A0] text-xs font-mono flex items-center gap-1">
             Made with <Heart size={12} className="text-[#6C63FF] fill-[#6C63FF]" /> using React + Vite + Tailwind
           </p>
 
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
-              className="text-[#55556A] hover:text-white transition-all hover:-translate-y-1 duration-200">
+              className="text-[#8080A0] hover:text-white transition-all hover:-translate-y-1 duration-200">
               <Github size={18} />
             </a>
             <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
-              className="text-[#55556A] hover:text-[#6C63FF] transition-all hover:-translate-y-1 duration-200">
+              className="text-[#8080A0] hover:text-[#6C63FF] transition-all hover:-translate-y-1 duration-200">
               <Linkedin size={18} />
             </a>
             <a href={`mailto:${personalInfo.email}`}
-              className="text-[#55556A] hover:text-[#00D4AA] transition-all hover:-translate-y-1 duration-200">
+              className="text-[#8080A0] hover:text-[#00D4AA] transition-all hover:-translate-y-1 duration-200">
               <Mail size={18} />
             </a>
           </div>
         </div>
 
         <div className="border-t border-white/5 mt-6 pt-6 text-center">
-          <p className="text-[#55556A] text-xs font-mono">
+          <p className="text-[#8080A0] text-xs font-mono">
             © {year} {personalInfo.name} · B.Tech CSE · SRM IST Delhi NCR
           </p>
         </div>

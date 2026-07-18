@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { Mail, Linkedin, Github, Send, CheckCircle } from 'lucide-react';
 
 interface FormState {
@@ -13,17 +14,68 @@ interface FormState {
 
 const Contact = () => {
   const [form, setForm] = useState<FormState>({ name: '', email: '', subject: '', message: '' });
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sentMethod, setSentMethod] = useState<'api' | 'mailto'>('api');
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const body = `Hi Suryansh,%0A%0AName: ${form.name}%0AEmail: ${form.email}%0A%0AMessage:%0A${form.message}`;
-    window.open(
-      `mailto:${personalInfo.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Contact')}&body=${body}`,
-      '_blank'
-    );
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    
+    // ── EMAILJS CREDENTIALS ──
+    const serviceId = 'service_0z4vpr3'; // Pre-filled from your EmailJS dashboard screenshot
+    const templateId = 'YOUR_EMAILJS_TEMPLATE_ID'; // Step 2: Paste your Template ID here
+    const publicKey = 'YOUR_EMAILJS_PUBLIC_KEY';   // Step 3: Paste your Public Key here
+
+    // Fallback: If credentials are not configured, open the native mail app
+    if (templateId === 'YOUR_EMAILJS_TEMPLATE_ID' || publicKey === 'YOUR_EMAILJS_PUBLIC_KEY') {
+      setSentMethod('mailto');
+      const body = `Hi Suryansh,%0A%0AName: ${form.name}%0AEmail: ${form.email}%0A%0AMessage:%0A${form.message}`;
+      window.open(
+        `mailto:${personalInfo.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Contact')}&body=${body}`,
+        '_blank'
+      );
+      setSent(true);
+      setTimeout(() => setSent(false), 5000);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setSentMethod('api');
+
+    try {
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: form.name,
+            from_email: form.email,
+            subject: form.subject || 'Portfolio Contact Form Message',
+            message: form.message,
+            reply_to: form.email
+          },
+        }),
+      });
+
+      if (response.ok) {
+        setSent(true);
+        setForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        const resText = await response.text();
+        setError(resText || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setError('Failed to send message. Please check your network connection.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -94,8 +146,14 @@ const Contact = () => {
               >
                 <CheckCircle size={48} className="text-[#00D4AA]" />
                 <div>
-                  <p className="text-white font-bold font-display text-lg">Email client opened!</p>
-                  <p className="text-[#8888A8] text-sm mt-1">Check your email client to complete sending.</p>
+                  <p className="text-white font-bold font-display text-lg">
+                    {sentMethod === 'api' ? 'Message Sent!' : 'Email client opened!'}
+                  </p>
+                  <p className="text-[#8080A0] text-sm mt-1">
+                    {sentMethod === 'api' 
+                      ? 'Thank you for getting in touch. I will respond shortly!' 
+                      : 'Check your email client to complete sending.'}
+                  </p>
                 </div>
               </motion.div>
             ) : (
@@ -152,9 +210,17 @@ const Contact = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn-primary w-full justify-center">
+                {error && (
+                  <p className="text-red-400 text-xs font-mono">{error}</p>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <Send size={16} />
-                  Send Message
+                  {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}

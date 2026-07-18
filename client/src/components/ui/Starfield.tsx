@@ -21,7 +21,7 @@ const Starfield = () => {
     let animationFrameId: number;
     let stars: Star[] = [];
     const numStars = 800; // Optimal performance
-    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let isMoving = false;
 
     // Resize handler

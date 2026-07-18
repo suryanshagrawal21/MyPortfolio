@@ -19,7 +19,7 @@
   /* Text */
   --color-text-main: #F0F0F8;
   --color-text-muted: #8888A8;
-  --color-text-dim: #55556A;
+  --color-text-dim: #8080A0;
 
   /* Borders */
   --color-border: rgba(108, 99, 255, 0.15);
@@ -37,6 +37,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #6C63FF;
+    outline-offset: 3px;
   }
 
   html {
@@ -380,7 +385,7 @@
   }
 
   .input-field::placeholder {
-    color: #55556A;
+    color: #8080A0;
   }
 
   .input-field:focus {

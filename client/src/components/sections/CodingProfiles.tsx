@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { codingProfiles, personalInfo } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { ExternalLink } from 'lucide-react';
 
 const CodingProfiles = () => {
@@ -71,7 +72,7 @@ const CodingProfiles = () => {
                   {profile.stat}
                 </p>
               </div>
-              <ExternalLink size={13} className="text-[#55556A] group-hover:text-[#6C63FF] transition-colors" />
+              <ExternalLink size={13} className="text-[#8080A0] group-hover:text-[#6C63FF] transition-colors" />
             </motion.a>
           ))}
         </div>

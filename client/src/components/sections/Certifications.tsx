@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { certifications } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { ExternalLink, Award } from 'lucide-react';
 
 const Certifications = () => {

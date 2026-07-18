@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import type { Project } from '../../data/portfolioData';
-import { itemVariants } from './SectionWrapper';
+import { itemVariants } from '../../constants/animations';
+import { Link } from 'react-router-dom';
 
 interface ProjectCardProps {
   project: Project;
@@ -40,35 +41,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </span>
           </div>
         </div>
-        <div className="flex gap-2">
-          <a
-            href={project.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-[#8888A8] hover:text-white bg-white/5 hover:bg-white/10 transition-all duration-200"
-            title="View Source"
-          >
-            <Github size={15} />
-          </a>
-          {project.liveLink && (
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#8888A8] hover:text-white bg-white/5 hover:bg-white/10 transition-all duration-200"
-              title="Live Demo"
-            >
-              <ExternalLink size={15} />
-            </a>
-          )}
-        </div>
       </div>
 
       {/* Title & Description */}
       <div className="relative z-10 mb-4 flex-grow">
-        <h3 className="text-[17px] font-bold text-white mb-1 font-display leading-tight">
-          {project.title}
-        </h3>
+        <Link to={`/project/${project.id}`} className="hover:text-[#6C63FF] transition-colors group/title">
+          <h3 className="text-[17px] font-bold text-white mb-1 font-display leading-tight group-hover/title:text-[#6C63FF] transition-colors flex items-center gap-1.5">
+            {project.title}
+            <span className="text-xs opacity-0 group-hover/title:opacity-100 transition-opacity">↗</span>
+          </h3>
+        </Link>
         <p className="text-[13px] text-[#6C63FF] font-medium mb-3">{project.subtitle}</p>
         <p className="text-[14px] text-[#8888A8] leading-relaxed line-clamp-3">{project.description}</p>
       </div>
@@ -86,10 +68,46 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Tags */}
-      <div className="relative z-10 flex flex-wrap gap-1.5 mt-auto pt-4 border-t border-white/5">
+      <div className="relative z-10 flex flex-wrap gap-1.5 pt-4 border-t border-white/5 mb-4">
         {project.tags.slice(0, 5).map((tag) => (
           <span key={tag} className="tag-badge">{tag}</span>
         ))}
+      </div>
+
+      {/* Action Buttons */}
+      <div className="relative z-10 flex gap-3 mt-auto">
+        <a
+          href={project.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-[13px] font-semibold text-white border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 transition-all duration-200"
+        >
+          <Github size={14} />
+          GitHub Repo
+        </a>
+        {project.liveLink ? (
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-[13px] font-semibold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+            style={{
+              background: `linear-gradient(135deg, ${project.accentColor}CC, ${project.accentColor}88)`,
+              border: `1px solid ${project.accentColor}50`,
+            }}
+          >
+            <ExternalLink size={14} />
+            Live Demo
+          </a>
+        ) : (
+          <button
+            disabled
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-[13px] font-semibold text-[#8080A0] border border-white/5 bg-white/[0.02] cursor-not-allowed"
+          >
+            <ExternalLink size={14} />
+            Coming Soon
+          </button>
+        )}
       </div>
     </motion.div>
   );

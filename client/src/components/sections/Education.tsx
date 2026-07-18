@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { education } from '../../data/portfolioData';
-import { SectionWrapper, SectionHeading, itemVariants } from '../ui/SectionWrapper';
+import { SectionWrapper, SectionHeading } from '../ui/SectionWrapper';
+import { itemVariants } from '../../constants/animations';
 import { GraduationCap, Star } from 'lucide-react';
 
 const Education = () => {
@@ -36,7 +37,7 @@ const Education = () => {
 
               <p className="text-[#6C63FF] font-semibold text-base mb-1">{edu.field}</p>
               <p className="text-[#8888A8] text-sm mb-1">{edu.institution}</p>
-              <p className="text-[#55556A] text-sm mb-5 font-mono">{edu.campus}</p>
+              <p className="text-[#8080A0] text-sm mb-5 font-mono">{edu.campus}</p>
 
               {/* CGPA */}
               <div className="flex items-center gap-3 mb-6">
